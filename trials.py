@@ -2,15 +2,6 @@ import csv
 
 # csv importer function
 def get_csv_data(filepath):
-    """
-    Opens the file at filepath, reads the data using the csv module's DictReader, 
-    converts that data to a regular list and returns that list.
-
-    :param filepath: The file path of the CSV data file to open
-    :returns: A list of dictionaries, where each dictionary represents one row from the file
-    """
-    ## place your code here to complete this method according to the instructions above
-
     # load csv data
     f = open(filepath, "r")
 
@@ -26,10 +17,12 @@ def get_csv_data(filepath):
     return csv_list
 
 # loading csv file
-data = get_csv_data("data/practice_data.csv")
+data = get_csv_data("practice_data.csv")
 
 
-# Saving value as 
+# Saving list of dictionaries as a csv file
+
+# Trial 1
 modified_data = [] # placeholder for a list of strings, containing field values separated by comma
 # loop through each row
 for row in data:
@@ -38,11 +31,23 @@ for row in data:
     field_list = list(row.values()) # storing dictionary values (field values) as list
     #print(field_list)
     field_vals = "'".join(str(a) for a in field_list) # create string, where each field value is separated by comma
-    print(field_vals)
-    new_vals = field_vals.replace("'", ",")
-    print(new_vals)
     modified_data.append(field_vals)
 
+# saving file
+csv_file = open("trial1.csv","w")
+
+#Write the Headers to the file
+csv_file.write(headers + "\n")
+
+#Write the data to the file
+for line in practice:
+    csv_file.write(line + '\n')
+
+#Close CSV File so the code writing of the file will work
+csv_file.close()
+
+
+# trial 2
 
 practice = []
 for a in data:
@@ -61,7 +66,7 @@ for a in data:
     practice.append(new_row)
 
 
-csv_file = open("data/practice.csv","w")
+csv_file = open("trial2.csv","w")
 
 #Write the Headers to the file
 csv_file.write(headers + "\n")
